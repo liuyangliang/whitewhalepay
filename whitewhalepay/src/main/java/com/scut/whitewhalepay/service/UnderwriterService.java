@@ -1,6 +1,7 @@
 package com.scut.whitewhalepay.service;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface UnderwriterService {
@@ -11,4 +12,6 @@ public interface UnderwriterService {
 			String uwIdCardPic2FileName, File uwAliPayQrCode, String uwAliPayQrCodeFileName, File uwAliPayPic,
 			String uwAliPayPicFileName);
 	public void notification();
+	
+	
 }
