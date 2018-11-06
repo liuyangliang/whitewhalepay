@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.scut.whitewhalepay.dao.TransactionsDAO;
 import com.scut.whitewhalepay.dao.UnderwriterDAO;
+import com.scut.whitewhalepay.enity.Transactions;
 import com.scut.whitewhalepay.enity.Underwriter;
 import com.scut.whitewhalepay.service.UnderwriterService;
 import com.scut.whitewhalepay.util.IdCardUtil;
@@ -27,6 +29,7 @@ public class UnderwriterServiceImpl implements UnderwriterService {
 	
 	@Autowired
 	private UnderwriterDAO underwriterDAO;
+	private TransactionsDAO transactionsDAO;
 
 	private static final String RESULT_SUCCESS = "SUCCESS";
 	private static final String RESULT_FAIL = "FAIL";
@@ -157,12 +160,76 @@ public class UnderwriterServiceImpl implements UnderwriterService {
 		return rtn;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.scut.whitewhalepay.service.UnderwriterService#notification()
-	 */
+
+	
 	@Override
-	public void notification() {
+	public Map<String, Object> inform(String transId, String uwIdentNo,String mctUSDTAct, int usdtAmount) {
 		// TODO Auto-generated method stub
+		Map<String, Object> rtn = new HashMap<String, Object>();
+	         
+			rtn.put("result", RESULT_SUCCESS);
+			rtn.put("transId", transId);
+			rtn.put("uwIdentNo", uwIdentNo);
+			rtn.put("mctUSDTAct", mctUSDTAct);
+			rtn.put("usdtAmount", usdtAmount);
+		return rtn;
+	
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> queryTransactions(int model) {
+		// TODO Auto-generated method stub
+		Map<String, Object> rtn = new HashMap<String, Object>();
+		List<Transactions>  transactionsList=null;
+		
+		try {
+	    
+			switch(model) {
+			
+			case 0: transactionsList=transactionsDAO.findByProperty("UwConfirm", false); break;
+			case 1: transactionsList=transactionsDAO.findByProperty("UwConfirm", true); break;
+			case 2: transactionsList=transactionsDAO.findAll();
+			}
+	   
+		    rtn.put("result", RESULT_SUCCESS);
+			rtn.put("transactionsList", transactionsList);
+			return rtn;
+		}catch(Exception e) {
+			
+			log.error("query database error", e);
+			rtn.put("result", RESULT_FAIL);
+			rtn.put("info", "query database error");
+			return rtn;
+		}
+	
 		
 	}
+	@Override
+	public Map<String, Object> confirm(String transId) {
+		// TODO Auto-generated method stub
+		Map<String, Object> rtn = new HashMap<String, Object>();
+	         
+		try {
+		Transactions  transaction=transactionsDAO.findById(transId);
+		transaction.setUwConfirm(true);    
+		transaction.setUsdtTransType(0);  //调用这个接口，则是承兑商自己转出的。
+		transactionsDAO.save(transaction);
+		
+			rtn.put("result", RESULT_SUCCESS);
+			rtn.put("info", "交易完成！");
+			
+		return rtn;
+		}catch(Exception e) {
+			
+			rtn.put("result", RESULT_FAIL);
+			rtn.put("info", "交易失败，承兑商重新确认！");  //如果这情况，自动重新执行Confirm操作？因为是转账USDT成功之后自动调用的     算了还是前端过段时间再次请求吧
+			return rtn;
+			
+		}
+	
+	}
+
+	
 }

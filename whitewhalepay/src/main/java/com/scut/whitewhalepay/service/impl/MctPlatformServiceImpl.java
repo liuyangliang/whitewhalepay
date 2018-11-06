@@ -215,7 +215,7 @@ public class MctPlatformServiceImpl implements MctPlatformService {
 			
 		}
 		else 
-			transaction.setTransType(1);  //1表示支付宝支付
+			transaction.setTransType(1);  //1表示支付宝支付，0表示银行卡，未赋值表示没有支付。如果不行就把2定义为没有支付
 		
 		String transactionPicPath = "";
 	

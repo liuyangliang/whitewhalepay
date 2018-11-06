@@ -26,7 +26,10 @@ public class UnderwriterAction extends ActionSupport {
 	private String uwAliPayQrCodeFileName;
 	private File uwAliPayPic;
 	private String uwAliPayPicFileName;
-
+	private String transId;
+	private String mctUSDTAct;
+	private int usdtAmount;
+	
 	public void setUwIdentNo(String uwIdentNo) {
 		this.uwIdentNo = uwIdentNo;
 	}
@@ -119,5 +122,38 @@ public class UnderwriterAction extends ActionSupport {
 			return RESULT_FAIL;
 		}
 	}
+	
+	/**
+	 * 暂时没用
+	 * @return
+	 */
+	public String inform() {
+		Map<String, Object> result = underwriterService.inform(transId, uwIdentNo,mctUSDTAct, usdtAmount);
+		Map<String, Object> request = (Map<String, Object>) ActionContext.getContext().get("request");
+		if (result.get("result").equals(RESULT_SUCCESS)) {
+			request.put("signup_state", RESULT_SUCCESS);
+			return RESULT_SUCCESS;
+		} else {
+			request.put("signup_state", RESULT_FAIL);
+			request.put("signup_info", result.get("signup_info"));
+			return RESULT_FAIL;
+		}
+	}
+	
+	public String confirm() {
+		Map<String, Object> result = underwriterService.confirm(transId);
+		@SuppressWarnings("unchecked")
+		Map<String, Object> request = (Map<String, Object>) ActionContext.getContext().get("request");
+		if (result.get("result").equals(RESULT_SUCCESS)) {
+			request.put("confirm_state", RESULT_SUCCESS);
+			return RESULT_SUCCESS;
+		} else {
+			request.put("confirm_state", RESULT_FAIL);
+			request.put("confirm_info", result.get("info"));
+			return RESULT_FAIL;
+		}
+	}
+	
+	
 
 }
