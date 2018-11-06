@@ -29,6 +29,7 @@ public class UnderwriterAction extends ActionSupport {
 	private String transId;
 	private String mctUSDTAct;
 	private int usdtAmount;
+	private int model;
 	
 	public void setUwIdentNo(String uwIdentNo) {
 		this.uwIdentNo = uwIdentNo;
@@ -136,6 +137,23 @@ public class UnderwriterAction extends ActionSupport {
 		} else {
 			request.put("signup_state", RESULT_FAIL);
 			request.put("signup_info", result.get("signup_info"));
+			return RESULT_FAIL;
+		}
+	}
+	
+	
+	
+	public String queryTransactions() {
+		Map<String, Object> result = underwriterService.queryTransactions(model);
+		@SuppressWarnings("unchecked")
+		Map<String, Object> request = (Map<String, Object>) ActionContext.getContext().get("request");
+		if (result.get("result").equals(RESULT_SUCCESS)) {
+			request.put("result", RESULT_SUCCESS);
+			request.put("transactionsList", result.get("transactionsList"));
+			return RESULT_SUCCESS;
+		} else {
+			request.put("result", RESULT_FAIL);
+			request.put("info", result.get("info"));
 			return RESULT_FAIL;
 		}
 	}
