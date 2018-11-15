@@ -1,0 +1,182 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Usdt Test API",
+        "description": "#",
+        "version": "1.0.0",
+        "termsOfService": "#",
+        "contact": {
+            "email": "#"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "#"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/usdt/address/{acc}": {
+            "post": {
+                "tags": [
+                    "usdt"
+                ],
+                "description": "get address from account",
+                "operationId": "Usdt.Get Address",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "acc",
+                        "description": "which address from",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"result\":\"地址\"(发送错误时为null),\"error\":{\"code\":\"\",\"message\"}(无错误时为null)} json response"
+                    },
+                    "403": {
+                        "description": ":account is empty"
+                    }
+                }
+            }
+        },
+        "/usdt/balance/{address}": {
+            "post": {
+                "tags": [
+                    "usdt"
+                ],
+                "description": "get balance from address",
+                "operationId": "Usdt.Get Balance",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "address",
+                        "description": "which address from",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"result\":\"余额\",\"error\":\"同上\"} json response"
+                    },
+                    "403": {
+                        "description": ":account is empty"
+                    }
+                }
+            }
+        },
+        "/usdt/info": {
+            "get": {
+                "tags": [
+                    "usdt"
+                ],
+                "description": "get list of transactions",
+                "operationId": "Usdt.Get Transactions",
+                "responses": {
+                    "200": {
+                        "description": "{钱包信息} json response"
+                    }
+                }
+            }
+        },
+        "/usdt/transaction/{tx}": {
+            "post": {
+                "tags": [
+                    "usdt"
+                ],
+                "description": "get list of transactions",
+                "operationId": "Usdt.Get Transactions",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tx",
+                        "description": "txid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"result\": {\"amount\":\"金额\",\"confirmations\":\"交易确认数\",\"referenceaddress\":\"接收地址\",\"sendingaddress\":\"发送地址\"},\"error\":\"同上\"} (json response)"
+                    }
+                }
+            }
+        },
+        "/usdt/transactions": {
+            "post": {
+                "tags": [
+                    "usdt"
+                ],
+                "description": "get list of transactions",
+                "operationId": "Usdt.Get Transactions",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "address",
+                        "description": "address in filter",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "limit",
+                        "description": "show at most n transactions (default: 10)",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "skip",
+                        "description": "skip the first n transactions (default: 0)",
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"result\":[{单个交易信息}...],\"error\":\"同上\"} json response"
+                    }
+                }
+            }
+        },
+        "/usdt/transfer": {
+            "post": {
+                "tags": [
+                    "usdt"
+                ],
+                "description": "get list of transactions",
+                "operationId": "Usdt.Get Transactions",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "from",
+                        "description": "the address to send from",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "to",
+                        "description": "the address to send to",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "amount",
+                        "description": "the amount to send",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"result\":\"交易号 txid\"(发生错误时为null),\"error\":{\"code\":\"\",\"message\"}(无错误时为null)} json response"
+                    }
+                }
+            }
+        }
+    }
+}

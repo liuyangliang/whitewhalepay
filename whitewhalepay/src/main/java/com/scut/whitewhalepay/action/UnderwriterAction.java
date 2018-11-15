@@ -28,8 +28,25 @@ public class UnderwriterAction extends ActionSupport {
 	private String uwAliPayPicFileName;
 	private String transId;
 	private String mctUSDTAct;
+	private String txId;
 	private int usdtAmount;
 	private int model;
+	private String uwId;
+	/**
+	 * @param uwId the uwId to set
+	 */
+	public void setUwId(String uwId) {
+		this.uwId = uwId;
+	}
+
+	/**
+	 * @param paySecret the paySecret to set
+	 */
+	public void setPaySecret(String paySecret) {
+		this.paySecret = paySecret;
+	}
+
+	private String paySecret;
 	
 	public void setUwIdentNo(String uwIdentNo) {
 		this.uwIdentNo = uwIdentNo;
@@ -81,6 +98,9 @@ public class UnderwriterAction extends ActionSupport {
 
 	public void setUwAliPayPicFileName(String uwAliPayPicFileName) {
 		this.uwAliPayPicFileName = uwAliPayPicFileName;
+	}
+	public void setTxId(String txId) {
+		this.txId = txId;
 	}
 
 	@Autowired
@@ -172,6 +192,19 @@ public class UnderwriterAction extends ActionSupport {
 		}
 	}
 	
-	
+	public String transfer() {
+		Map<String, Object> result = underwriterService.transfer(transId,uwId,paySecret );
+		@SuppressWarnings("unchecked")
+		Map<String, Object> request = (Map<String, Object>) ActionContext.getContext().get("request");
+		if (result.get("result").equals(RESULT_SUCCESS)) {
+			request.put("result", RESULT_SUCCESS);
+			request.put("info", result.get("info"));
+			return RESULT_SUCCESS;
+		} else {
+			request.put("result", RESULT_FAIL);
+			request.put("info", result.get("info"));
+			return RESULT_FAIL;
+		}
+	}
 
 }

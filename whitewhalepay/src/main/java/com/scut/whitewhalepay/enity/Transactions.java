@@ -24,8 +24,9 @@ public class Transactions {
 	private String uwId;
 	private String uwUsdtAct;
 	private String uwBankCard;
-	private String TransactionPic;
-	private boolean UwConfirm;
+	private String transactionPic;
+	private boolean uwConfirm;
+	private String txId;
 	@Id
 	@Column(name = "TransId")
 	public String getTransId() {
@@ -139,31 +140,67 @@ public class Transactions {
 	public String getUwBankCard() {
 		return uwBankCard;
 	}
-	public void setUwBankCard(String uwBankCard) {
-		this.uwBankCard = uwBankCard;
-	}
-	
-	@Basic
-    @Column(name = "TransactionPic")
+	/**
+	 * @return the transactionPic
+	 */
 	public String getTransactionPic() {
-		return TransactionPic;
+		return transactionPic;
 	}
-	
 	/**
 	 * @param transactionPic the transactionPic to set
 	 */
 	public void setTransactionPic(String transactionPic) {
-		TransactionPic = transactionPic;
+		this.transactionPic = transactionPic;
 	}
 	/**
 	 * @return the uwConfirm
 	 */
 	public boolean isUwConfirm() {
-		return UwConfirm;
+		return uwConfirm;
+	}
+	/**
+	 * @param uwConfirm the uwConfirm to set
+	 */
+	public void setUwConfirm(boolean uwConfirm) {
+		this.uwConfirm = uwConfirm;
+	}
+	/**
+	 * @return the txId
+	 */
+	public String getTxId() {
+		return txId;
+	}
+	/**
+	 * @param txId the txId to set
+	 */
+	public void setTxId(String txId) {
+		this.txId = txId;
+	}
+	public void setUwBankCard(String uwBankCard) {
+		this.uwBankCard = uwBankCard;
 	}
 	
-	public void setUwConfirm(boolean UwConfirm) {
-		this.UwConfirm = UwConfirm;
+	@Basic
+    @Column(name = "transactionPic")
+	public String gettransactionPic() {
+		return transactionPic;
+	}
+	
+	/**
+	 * @param transactionPic the transactionPic to set
+	 */
+	public void settransactionPic(String transactionPic) {
+		transactionPic = transactionPic;
+	}
+	/**
+	 * @return the uwConfirm
+	 */
+	public boolean isuwConfirm() {
+		return uwConfirm;
+	}
+	
+	public void setuwConfirm(boolean uwConfirm) {
+		this.uwConfirm = uwConfirm;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -172,8 +209,8 @@ public class Transactions {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((TransactionPic == null) ? 0 : TransactionPic.hashCode());
-		result = prime * result + (UwConfirm ? 1231 : 1237);
+		result = prime * result + ((transactionPic == null) ? 0 : transactionPic.hashCode());
+		result = prime * result + (uwConfirm ? 1231 : 1237);
 		result = prime * result + ((mctId == null) ? 0 : mctId.hashCode());
 		result = prime * result + ((reason == null) ? 0 : reason.hashCode());
 		result = prime * result + transAmt;
@@ -201,12 +238,12 @@ public class Transactions {
 		if (getClass() != obj.getClass())
 			return false;
 		Transactions other = (Transactions) obj;
-		if (TransactionPic == null) {
-			if (other.TransactionPic != null)
+		if (transactionPic == null) {
+			if (other.transactionPic != null)
 				return false;
-		} else if (!TransactionPic.equals(other.TransactionPic))
+		} else if (!transactionPic.equals(other.transactionPic))
 			return false;
-		if (UwConfirm != other.UwConfirm)
+		if (uwConfirm != other.uwConfirm)
 			return false;
 		if (mctId == null) {
 			if (other.mctId != null)

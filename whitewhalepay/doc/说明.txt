@@ -1,0 +1,44 @@
+﻿usdt节点 以及Api服务都已经部署到服务器 /home/ubuntu下 
+节点与api服务都用supervisor进行进程托管 
+以下几点注意事项
+
+
+1./home/ubuntu/api/conf/app.conf为api服务配置文件，修改文件后需重启api服务。
+
+
+2.httpaddr及httpport建议配合服务器防火墙或安全组使用，请勿将端口暴露！！
+
+
+3.USDT开头的配置项请勿修改，USDTPWD项如果需要对钱包(指usdt节点)进行加密此处填写密码用于转账。
+
+
+4.重启api服务请运行 sudo supervisorctl restart httpusdt 
+
+
+5.接口文档 /home/ubuntu/api/doc.zip 请自行下载查看，因跨域问题，请把解压后的文件放到本地任一http站点下查看。
+
+
+6.目前节点同步未完成，转账功能无法完成，请调用/v1/usdt/info接口，查看节点信息，对比网络上的区块高度查看同步情况
+
+
+7.主要实现接口：
+
+
+/v1/usdt/address/{acc} 获取地址 acc相同会获取相同地址
+
+
+/v1/usdt/balance/{address} 获取地址usdt余额
+   
+
+/v1/usdt/transfer	发起交易，转账的金额有效位数是小数点后两位，转账余额不足的错误码                                  是-206
+
+
+/v1/usdt/transactions	交易列表
+
+
+/v1/usdt/transaction/{tx}	根据txid查看一条交易
+参数及返回请查看文档
+
+
+
+8.usdt转账需要收取btc作为手续费，大约0.00005btc，btc相关接口等确认需求后再开发

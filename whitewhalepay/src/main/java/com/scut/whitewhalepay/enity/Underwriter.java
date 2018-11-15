@@ -20,7 +20,20 @@ public class Underwriter {
 	private String uwAliPayName;
 	private String uwAliPayQrCode;
 	private String uwAliPayPic;
+	private String paySecret;
 	
+	/**
+	 * @return the paySecret
+	 */
+	public String getPaySecret() {
+		return paySecret;
+	}
+	/**
+	 * @param paySecret the paySecret to set
+	 */
+	public void setPaySecret(String paySecret) {
+		this.paySecret = paySecret;
+	}
 	@Id
 	@Column(name = "UwId")
 	public String getUwId() {

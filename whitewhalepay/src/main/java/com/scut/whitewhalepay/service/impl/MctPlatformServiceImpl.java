@@ -103,12 +103,14 @@ public class MctPlatformServiceImpl implements MctPlatformService {
 						transactionsDAO.save(transaction);
 	
 						List<BankCard> bankcardList=bankcardDAO.findByUwId(uwId);
-						String alipayCode=underwriter.getUwAliPayPic();
+						String alipayCode=underwriter.getUwAliPayQrCode();
+						String alipayPic=underwriter.getUwAliPayPic();
 						rtn.put("result", RESULT_SUCCESS);
 						rtn.put("transId", transId);
 						rtn.put("uwId", uwId);
 		    			rtn.put("bankInfo",bankcardList);  //暂时这样返回，但是这样返回不太好，商户jsp要想接收到还得定义一个BankCard类似的类。应该可以转化为map或者dictionary类型的
 		    			rtn.put("alipayCode",alipayCode);  //暂时返回地址，最后应该返回图片。因为返回地址会暴露文件位置
+		    			rtn.put("alipayPic",alipayPic);  //暂时返回地址，最后应该返回图片。因为返回地址会暴露文件位置
 		    		
 				}
 				else {

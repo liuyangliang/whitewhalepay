@@ -34,9 +34,10 @@
 						</label> <input type="text" name="mctIdentNo" required autocomplete="off" />
 					</div>
 					<div class="field-wrap">
-						<label> 密码<span class="req">*</span>
+						<label> 登录密码<span class="req">*</span>
 						</label> <input type=password name="loginSecret" required autocomplete="off" />
 					</div>
+					
 					<div class="field-wrap">
 						<label> 姓名<span class="req">*</span>
 						</label> <input type="text" name="mctName" required autocomplete="off" />
@@ -68,7 +69,11 @@
 						</label> <input type="text" name="uwIdentNo" required autocomplete="off" />
 					</div>
 					<div class="field-wrap">
-						<label> 密码<span class="req">*</span>
+						<label> 登录密码<span class="req">*</span>
+						</label> <input type=password name="loginSecret" required autocomplete="off" />
+					</div>
+					<div class="field-wrap">
+						<label> 支付密码<span class="req">*</span>
 						</label> <input type=password name="loginSecret" required autocomplete="off" />
 					</div>
 					<div class="field-wrap">
@@ -84,7 +89,7 @@
 						<input type="text" name="uwAliPayName" required autocomplete="off" />
 					</div>
 					<div class="field-wrap">
-						<input type="file" name="uwIdCardPic1" required autocomplete="off" accept="image/jpeg,image/jpg,image/png" />
+						<input type="file" name="uwIdCardPic1" required autocomplete="off"  value="请输入身份证正面" accept="image/jpeg,image/jpg,image/png" />
 					</div>
 					<div class="field-wrap">
 						 <input type="file" name="uwIdCardPic2" required autocomplete="off" accept="image/jpeg,image/jpg,image/png" />

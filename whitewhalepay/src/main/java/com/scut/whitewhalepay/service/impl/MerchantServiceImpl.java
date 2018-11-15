@@ -1,6 +1,7 @@
 package com.scut.whitewhalepay.service.impl;
 
 import java.io.File;
+import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.scut.whitewhalepay.dao.MerchantDAO;
+import com.scut.whitewhalepay.dao.TransactionsDAO;
 import com.scut.whitewhalepay.enity.Merchant;
+import com.scut.whitewhalepay.enity.Transactions;
 import com.scut.whitewhalepay.service.MerchantService;
 import com.scut.whitewhalepay.util.IdCardUtil;
 import com.scut.whitewhalepay.util.PhoneUtil;
@@ -27,6 +30,7 @@ public class MerchantServiceImpl implements MerchantService {
 
 	@Autowired
 	private MerchantDAO merchantDAO;
+	private TransactionsDAO transactionsDAO;
 
 	private static final String RESULT_SUCCESS = "SUCCESS";
 	private static final String RESULT_FAIL = "FAIL";
@@ -138,4 +142,34 @@ public class MerchantServiceImpl implements MerchantService {
 		rtn.put("result", RESULT_SUCCESS);
 		return rtn;
 	}
+
+
+	@Override
+	public Map<String, Object> queryTransactions(int model,String mctIdentNo, String loginSecret,String TransationId,Time BeginTime,Time EndTime) {
+		// TODO Auto-generated method stub
+		Map<String, Object> rtn = new HashMap<String, Object>();
+		List<Transactions>  transactionsList=null;
+		
+		try {
+	    
+			
+			switch(model) {
+			
+			case 0: transactionsList=transactionsDAO.findByProperty("UwConfirm", false); break;
+			case 1: transactionsList=transactionsDAO.findByProperty("UwConfirm", true); break;
+			case 2: transactionsList=transactionsDAO.findAll();
+			}
+	   
+		    rtn.put("result", RESULT_SUCCESS);
+			rtn.put("transactionsList", transactionsList);
+			return rtn;
+		}catch(Exception e) {
+			
+			log.error("query database error", e);
+			rtn.put("result", RESULT_FAIL);
+			rtn.put("info", "query database error");
+			return rtn;
+		}
+}
+	
 }

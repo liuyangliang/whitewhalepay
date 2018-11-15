@@ -55,12 +55,37 @@ public interface UnderwriterService {
 	Map<String, Object> queryTransactions(int model);
 
 	
+
 	/**
-	 * function:当承兑商转账之后，收到numaex的返回的信息，成功之后调用此接口通知后台表示承兑商已经支付
+	 * 功能描述:交易完成时候调用。当承兑商转账之后，收到numaex的返回的信息，成功之后调用此接口通知后台表示承兑商已经支付
+	 * @param transId
+	 * @param txId
+	 * @return
+	 */
+	Map<String, Object> finish(String transId, String txId);
+
+	
+	/**
+	 * 功能描述：承兑商发起USDT转账请求
+	 * @param transId
+	 * @param uwId
+	 * @param paySecret
+	 * @return
+	 */
+	Map<String, Object> transfer(String transId, String uwId, String paySecret);
+
+	/**
 	 * @param transId
 	 * @return
 	 */
 	Map<String, Object> confirm(String transId);
+
+	/**
+	 * @param n
+	 * @param transId
+	 * @return
+	 */
+	boolean timer(int n, String transId);
 	
 	
 }

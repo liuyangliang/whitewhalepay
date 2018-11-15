@@ -39,7 +39,7 @@
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i>个人信息</a></li>
-            <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i>登出</a></li>
+            <li><a class="dropdown-item" href="page-login.html"><i class="fa fa-sign-out fa-lg"></i> 	登出</a></li>
           </ul>
         </li>
       </ul>
@@ -50,63 +50,50 @@
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">张 泷</p>
-          <p class="app-sidebar__user-designation">承兑商</p>
+          <p class="app-sidebar__user-designation">商 户</p>
         </div>
       </div>
       <ul class="app-menu">
-        <li><a class="app-menu__item active" href="#"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">首页</span></a></li>
-        <li><a class="app-menu__item"  href="<%=basePath%>underwriterOrder#"><i class="app-menu__icon fa fa-table"></i><span class="app-menu__label">订单信息</span></a></li>
-		<li><a class="app-menu__item "   href="<%=basePath%>underwriterInfo#"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">承兑商配置</span></a></li>
+          <li><a class="app-menu__item " href="<%=basePath%>merchantIndex#"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">首页</span></a></li>
+        <li><a class="app-menu__item" href="<%=basePath%>merchantOrder#"><i class="app-menu__icon fa fa-table"></i><span class="app-menu__label">订单信息</span></a></li>
+		<li><a class="app-menu__item active" href="<%=basePath%>merchantInfo#"><i class="app-menu__icon fa fa-address-book"></i><span class="app-menu__label">商户配置</span></a></li>
       </ul>
     </aside>
     <main class="app-content">
-      <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small primary coloured-icon"><i class="icon fa fa-usd fa-3x"></i>
-            <div class="info">
-              <h4>USDT账户余额</h4>
-              <p><b>5</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small primary coloured-icon"><i class="icon fa fa-usd fa-3x"></i>
-            <div class="info">
-              <h4>保证金数量</h4>
-              <p><b>5</b></p>
-            </div>
-          </div>
-        </div>
-          <div class="row">
-      	<div class="col-md-6 col-lg-3">
-          <div class="widget-small info coloured-icon"><i class="icon fa fa-credit-card fa-3x"></i>
-            <div class="info">
-              <h4>目前待确认订单笔数</h4>
-              <p><b>25</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small danger coloured-icon"><i class="icon fa fa-credit-card fa-3x"></i>
-            <div class="info">
-              <h4>目前待解决卖币笔数</h4>
-              <p><b>10</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small danger coloured-icon"><i class="icon fa fa-credit-card fa-3x"></i>
-            <div class="info">
-              <h4>目前待处理买币异议订单数</h4>
-              <p><b>500</b></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="widget-small danger coloured-icon"><i class="icon fa fa-credit-card fa-3x"></i>
-            <div class="info">
-              <h4>目前待处理卖币异议订单数</h4>
-              <p><b>500</b></p>
+      <div class="row user">
+        <div class="col-md-12">
+          <div class="tab-content">
+            <div class="tab-pane active" id="user-settings">
+              <div class="tile user-settings">
+                <h4 class="line-head">个人信息</h4>
+                <form>              
+                  <div class="row">
+                    <div class="col-md-8 mb-4">
+                      <label>姓名</label>
+                      <input class="form-control" type="text" disabled="disabled" value="黄少伟">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>身份证号码</label>
+                      <input class="form-control" type="text" disabled="disabled" value="445222199808044337">
+                    </div>
+                     <div class="col-md-8 mb-4">
+                      <label>Usdt钱包账号</label>
+                      <input class="form-control" type="text" disabled="disabled" value="123456">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-8 mb-4">
+                      <label>登录密码</label>
+                      <input class="form-control" type="password" value="123456">
+                    </div>
+                  </div>
+                  <div class="row mb-10">
+                    <div class="col-md-12">
+                      <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
